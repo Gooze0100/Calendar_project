@@ -1,7 +1,31 @@
 * {
-    margin: 0;
+    /* margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    */
 }
+
+ul {
+    list-style: none;
+}
+
+.inputError {
+    display: none;
+    color: crimson;
+}
+
+/* input:invalid:required {
+    border-color: crimson;
+} */
+
+input:focus:required:invalid {
+    border-color: crimson;
+}
+
+.help-class {
+    border-color: crimson;
+}
+
 
 
 /* ============================
