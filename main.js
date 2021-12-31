@@ -11,22 +11,94 @@ function getDaysInMonth() {
   return daysInMonth;
 }
 
-const d = new Date(year, month, 0);
-const weekDay = d.getDay();
-
 const allMonthDays = getDaysInMonth();
 const dayNumber = document.querySelector("#dayNumber");
-for (let i = 1; i <= allMonthDays; i++) {
-  const liEl = document.createElement("li");
-  const spanEl = document.createElement("span");
-  const number = document.createTextNode(`${i}`);
-  spanEl.appendChild(number);
-  liEl.appendChild(spanEl);
-  dayNumber.appendChild(liEl);
-  liEl.setAttribute("value", i);
+const monday = document.querySelector("#monday");
+const tuesday = document.querySelector("#tuesday");
+const wednesday = document.querySelector("#wednesday");
+const thursday = document.querySelector("#thursday");
+const friday = document.querySelector("#friday");
+const saturday = document.querySelector("#saturday");
+const sunday = document.querySelector("#sunday");
+let divEl;
+let day;
+for (let i = 0; i < allMonthDays; i++) {
+  const d = new Date(year, month, i);
+
+  const weekDay = d.getDay();
+
+  if (i < weekDay) {
+    divEl = document.createElement("div");
+    monday.appendChild(divEl);
+  }
+
+  switch (weekDay) {
+    case 0:
+      // if irasyti kad tuscius div, kad jei i nera lygus 1 arba prasideda ne nuo 1
+      divEl = document.createElement("div");
+      day = document.createTextNode(`${i + 1}`);
+      divEl.setAttribute("value", `${i + 1}`);
+      divEl.appendChild(day);
+      monday.appendChild(divEl);
+      break;
+    case 1:
+      divEl = document.createElement("div");
+      day = document.createTextNode(`${i + 1}`);
+      divEl.setAttribute("value", `${i + 1}`);
+      divEl.appendChild(day);
+      tuesday.appendChild(divEl);
+      break;
+    case 2:
+      divEl = document.createElement("div");
+      day = document.createTextNode(`${i + 1}`);
+      divEl.setAttribute("value", `${i + 1}`);
+      divEl.appendChild(day);
+      wednesday.appendChild(divEl);
+      break;
+    case 3:
+      divEl = document.createElement("div");
+      day = document.createTextNode(`${i + 1}`);
+      divEl.setAttribute("value", `${i + 1}`);
+      divEl.appendChild(day);
+      thursday.appendChild(divEl);
+      break;
+    case 4:
+      divEl = document.createElement("div");
+      day = document.createTextNode(`${i + 1}`);
+      divEl.setAttribute("value", `${i + 1}`);
+      divEl.appendChild(day);
+      friday.appendChild(divEl);
+      break;
+    case 5:
+      divEl = document.createElement("div");
+      day = document.createTextNode(`${i + 1}`);
+      divEl.setAttribute("value", `${i + 1}`);
+      divEl.appendChild(day);
+      saturday.appendChild(divEl);
+      break;
+    case 6:
+      divEl = document.createElement("div");
+      day = document.createTextNode(`${i + 1}`);
+      divEl.setAttribute("value", `${i + 1}`);
+      divEl.appendChild(day);
+      sunday.appendChild(divEl);
+      break;
+  }
+
+  //   const liEl = document.createElement("li");
+  //   const spanEl = document.createElement("span");
+  //   const number = document.createTextNode(`${i}`);
+  //   spanEl.appendChild(number);
+  //   liEl.appendChild(spanEl);
+  //   dayNumber.appendChild(liEl);
+  //   liEl.setAttribute("value", i);
+  //   console.log(weekDay);
 }
 
-// console.log(weekDay + 1);
+// const formInputs = document.querySelector("#formInputs");
+document.querySelector("#showForm").addEventListener("click", () => {
+  document.querySelector("#formInputs").style.display = "block";
+});
 
 // session storage
 const createEventBtn = document.querySelector("#createEventBtn");
@@ -83,15 +155,12 @@ function createEvent() {
 //   sessionStorage.getItem("description");
 // }
 
-// function detailView() {
-//   const detailedViews = document.querySelector("#detailedViews");
-//   sessionStorage.getItem("title");
-//   sessionStorage.getItem("date");
-//   sessionStorage.getItem("startTime");
-//   sessionStorage.getItem("endTime");
-//   sessionStorage.getItem("type");
-//   sessionStorage.getItem("description");
-// }
+const detailedViews = document.querySelector("#detailedViews");
+function detailView(value) {
+  const event = sessionStorage.getItem(`${value}`);
+  const data = JSON.parse(event);
+  console.log(data);
+}
 
 // validation
 
@@ -165,5 +234,23 @@ typeInput.addEventListener("input", () => {
   } else {
     document.querySelector("#endTimeErr1").style.display = "none";
     typeInput.classList.remove("help-class");
+  }
+});
+
+// padaryti button disabled jei forma negerai uzpildyta
+
+const modal = document.querySelector("#modalView");
+const modalBtn = document.querySelector("#modalBtn");
+const closeBtn = document.querySelector(".closeBtn");
+
+modalBtn.addEventListener("click", () => {
+  modal.style.display = "block";
+});
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+window.addEventListener("click", (e) => {
+  if (e.target == modal) {
+    modal.style.display = "none";
   }
 });

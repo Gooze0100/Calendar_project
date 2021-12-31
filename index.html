@@ -15,27 +15,42 @@
           <h1 id="currentPeriod"></h1>
         </header>
         <div>
-          <button>Create event</button>
+          <button id="showForm" class="btn">Create event</button>
         </div>
       </div>
       <div>
-        <div id="monthView">
-          <ul>
-            <li value="1">Monday</li>
-            <li value="2">Tuesday</li>
-            <li value="3">Wednesday</li>
-            <li value="4">Thursday</li>
-            <li value="5">Friday</li>
-            <li value="6">Saturday</li>
-            <li value="7">Sunday</li>
-          </ul>
-          <div id="days">
-            <ul id="dayNumber"></ul>
-            <div id="bookings"></div>
+        <div id="monthView" class="month-view">
+          <div>
+            <div>Monday</div>
+            <div id="monday"></div>
+          </div>
+          <div>
+            <div>Tuesday</div>
+            <div id="tuesday"></div>
+          </div>
+          <div>
+            <div>Wednesday</div>
+            <div id="wednesday"></div>
+          </div>
+          <div>
+            <div>Thursday</div>
+            <div id="thursday"></div>
+          </div>
+          <div>
+            <div>Friday</div>
+            <div id="friday"></div>
+          </div>
+          <div>
+            <div>Saturday</div>
+            <div id="saturday"></div>
+          </div>
+          <div>
+            <div>Sunday</div>
+            <div id="sunday"></div>
           </div>
         </div>
         <div>
-          <div>
+          <div id="formInputs" class="form-inputs">
             <form action="" method="post">
               <div>
                 <label for="title">Title</label>
@@ -112,7 +127,17 @@
               </div>
             </form>
           </div>
-          <div id="detailedViews">Detail view, create field on fly</div>
+          <div id="detailedViews">
+            Detail view, create field on fly
+            <button id="modalBtn" class="button">Delete</button>
+
+            <div id="modalView" class="modal">
+              <div class="modal-content">
+                <span class="closeBtn">Cancel</span>
+                <span class="submitBtn"> Submit </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
