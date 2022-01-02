@@ -18,40 +18,44 @@
           <button id="showForm" class="btn">Create event</button>
         </div>
       </div>
-      <div>
-        <div id="monthView" class="month-view">
-          <div>
-            <div>Monday</div>
-            <div id="monday"></div>
-          </div>
-          <div>
-            <div>Tuesday</div>
-            <div id="tuesday"></div>
-          </div>
-          <div>
-            <div>Wednesday</div>
-            <div id="wednesday"></div>
-          </div>
-          <div>
-            <div>Thursday</div>
-            <div id="thursday"></div>
-          </div>
-          <div>
-            <div>Friday</div>
-            <div id="friday"></div>
-          </div>
-          <div>
-            <div>Saturday</div>
-            <div id="saturday"></div>
-          </div>
-          <div>
-            <div>Sunday</div>
-            <div id="sunday"></div>
+      <div class="all-view">
+        <div class="month-view">
+          <h3>Month View</h3>
+          <div class="calendar">
+            <div>
+              <div>Monday</div>
+              <div id="monday"></div>
+            </div>
+            <div>
+              <div>Tuesday</div>
+              <div id="tuesday"></div>
+            </div>
+            <div>
+              <div>Wednesday</div>
+              <div id="wednesday"></div>
+            </div>
+            <div>
+              <div>Thursday</div>
+              <div id="thursday"></div>
+            </div>
+            <div>
+              <div>Friday</div>
+              <div id="friday"></div>
+            </div>
+            <div>
+              <div>Saturday</div>
+              <div id="saturday"></div>
+            </div>
+            <div>
+              <div>Sunday</div>
+              <div id="sunday"></div>
+            </div>
           </div>
         </div>
         <div>
           <div id="formInputs" class="form-inputs">
             <form action="" method="post">
+              <h3>Create View</h3>
               <div>
                 <label for="title">Title</label>
                 <input type="text" required id="title" maxlength="50" />
@@ -123,18 +127,19 @@
                 ></textarea>
               </div>
               <div>
-                <button type="submit" id="createEventBtn">Create event</button>
+                <button type="submit" id="createEventBtn" class="btn">
+                  Create event
+                </button>
               </div>
             </form>
           </div>
           <div id="detailedViews">
             Detail view, create field on fly
-            <button id="modalBtn" class="button">Delete</button>
-
+            <button id="modalBtn" class="btn">Delete</button>
             <div id="modalView" class="modal">
               <div class="modal-content">
-                <span class="closeBtn">Cancel</span>
-                <span class="submitBtn"> Submit </span>
+                <button class="btn closeBtn">Cancel</button>
+                <button class="btn submitBtn">Submit</button>
               </div>
             </div>
           </div>

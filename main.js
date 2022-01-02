@@ -7,7 +7,7 @@ const month = date.getMonth();
 currentPeriod.append(`${month + 1} ${year}`);
 
 function getDaysInMonth() {
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const daysInMonth = new Date(year, month, 0).getDate();
   return daysInMonth;
 }
 
@@ -22,15 +22,23 @@ const saturday = document.querySelector("#saturday");
 const sunday = document.querySelector("#sunday");
 let divEl;
 let day;
+let d1 = new Date(year, month, 0);
+let d;
+const weekDay = d1.getDay();
+console.log(month);
+console.log(weekDay);
 for (let i = 0; i < allMonthDays; i++) {
-  const d = new Date(year, month, i);
+  // perdaug sukuria reikia pasiziureti kad ciklas neziureti tiek skaiciu
+  d = new Date(year, month, i);
 
   const weekDay = d.getDay();
 
-  if (i < weekDay) {
-    divEl = document.createElement("div");
-    monday.appendChild(divEl);
-  }
+  //   if (i < weekDay) {
+  //     divEl = document.createElement("div");
+  //     divEl.classList.add("helper");
+  //     monday.appendChild(divEl);
+  //     // continue;
+  //   }
 
   switch (weekDay) {
     case 0:

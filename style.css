@@ -2,7 +2,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-   
+}
+
+body {
+    font-family: 'Gill Sans', 'Trebuchet MS', sans-serif;
 }
 
 ul {
@@ -21,19 +24,42 @@ header {
     color: white;
     font-weight: bold;
     border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s all cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.btn:hover {
+    background-color: rgba(65, 105, 225, 0.8);
+}
+
+.all-view {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
 }
 
 .month-view {
-    max-width: 66%;
+    width: 100%;
+}
+
+.calendar {
+    width: 100%;
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: start;
 }
 
+.helper {
+    height: 20px;
+    width: 20px;
+    
+}
+
 .inputError {
     display: none;
     color: crimson;
+    font-size: 12px;
 }
 
 /* input:invalid:required {
@@ -49,13 +75,40 @@ input:focus:required:invalid {
 }
 
 .form-inputs {
-    display: none;
+    /* display: none; */
+    box-shadow: 4px 5px 9px 1px rgba(0,0,0,0.43);
+    padding: 20px;
+    border-radius: 5px;
 }
 
-.button {
-    /* padding: 1em 2em;
-    border: 0; */
+h3 {
+    text-align: center;
 }
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+
+input, select, textarea {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 2px;
+    width: 100%;
+}
+
+input, select {
+    padding: 5px 10px;
+}
+
+textarea {
+    padding: 5px 10px;
+    resize: vertical;
+}
+
+
 
 .modal {
     display: none;
@@ -77,11 +130,6 @@ input:focus:required:invalid {
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2),0 7px 20px 0 rgba(0, 0, 0, 0.2);
     animation-name: modalOpen;
     animation-duration: 1s;
-}
-
-.closeBtn {
-    color: #ccc;
-    
 }
 
 @keyframes modalOpen {
