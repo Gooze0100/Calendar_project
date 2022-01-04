@@ -4,7 +4,10 @@ const currentPeriod = document.querySelector("#currentPeriod");
 const date = new Date();
 const year = date.getFullYear();
 const month = date.getMonth();
-currentPeriod.append(`${month + 1} ${year}`);
+const options = { year: "numeric", month: "long" };
+// console.log(
+//   new Date(`${year}-${month + 1}-${i + 1}`).toLocaleDateString("lt")
+currentPeriod.append(new Date(year, month).toLocaleDateString("en", options));
 
 function getDaysInMonth() {
   const daysInMonth = new Date(year, month, 0).getDate();
@@ -21,74 +24,240 @@ const friday = document.querySelector("#friday");
 const saturday = document.querySelector("#saturday");
 const sunday = document.querySelector("#sunday");
 let divEl;
+let spanEl;
+let divEl1;
+let divEl2;
+let divEl3;
+let divEl4;
+let divEl5;
 let day;
 let d1 = new Date(year, month, 0);
 let d;
-const weekDay = d1.getDay();
-console.log(month);
-console.log(weekDay);
+const weekDayOfFirstMonthDay = d1.getDay();
+// console.log(month);
+// console.log(weekDayOfFirstMonthDay);
+
+if (weekDayOfFirstMonthDay === 1) {
+  divEl = document.createElement("div");
+  divEl.classList.add("helper");
+  monday.appendChild(divEl);
+} else if (weekDayOfFirstMonthDay === 2) {
+  divEl = document.createElement("div");
+  divEl1 = document.createElement("div");
+  divEl.classList.add("helper");
+  divEl1.classList.add("helper");
+  monday.appendChild(divEl);
+  tuesday.appendChild(divEl1);
+} else if (weekDayOfFirstMonthDay === 3) {
+  divEl = document.createElement("div");
+  divEl1 = document.createElement("div");
+  divEl2 = document.createElement("div");
+  divEl.classList.add("helper");
+  divEl1.classList.add("helper");
+  divEl2.classList.add("helper");
+  monday.appendChild(divEl);
+  tuesday.appendChild(divEl1);
+  wednesday.appendChild(divEl2);
+} else if (weekDayOfFirstMonthDay === 4) {
+  divEl = document.createElement("div");
+  divEl1 = document.createElement("div");
+  divEl2 = document.createElement("div");
+  divEl3 = document.createElement("div");
+  divEl.classList.add("helper");
+  divEl1.classList.add("helper");
+  divEl2.classList.add("helper");
+  divEl3.classList.add("helper");
+  monday.appendChild(divEl);
+  tuesday.appendChild(divEl1);
+  wednesday.appendChild(divEl2);
+  thursday.appendChild(divEl3);
+} else if (weekDayOfFirstMonthDay === 5) {
+  divEl = document.createElement("div");
+  divEl1 = document.createElement("div");
+  divEl2 = document.createElement("div");
+  divEl3 = document.createElement("div");
+  divEl4 = document.createElement("div");
+  divEl.classList.add("helper");
+  divEl1.classList.add("helper");
+  divEl2.classList.add("helper");
+  divEl3.classList.add("helper");
+  divEl4.classList.add("helper");
+  monday.appendChild(divEl);
+  tuesday.appendChild(divEl1);
+  wednesday.appendChild(divEl2);
+  thursday.appendChild(divEl3);
+  friday.appendChild(divEl4);
+} else if (weekDayOfFirstMonthDay === 6) {
+  divEl = document.createElement("div");
+  divEl1 = document.createElement("div");
+  divEl2 = document.createElement("div");
+  divEl3 = document.createElement("div");
+  divEl4 = document.createElement("div");
+  divEl5 = document.createElement("div");
+  divEl.classList.add("helper");
+  divEl1.classList.add("helper");
+  divEl2.classList.add("helper");
+  divEl3.classList.add("helper");
+  divEl4.classList.add("helper");
+  divEl5.classList.add("helper");
+  monday.appendChild(divEl);
+  tuesday.appendChild(divEl1);
+  wednesday.appendChild(divEl2);
+  thursday.appendChild(divEl3);
+  friday.appendChild(divEl4);
+  saturday.appendChild(divEl5);
+}
+
 for (let i = 0; i < allMonthDays; i++) {
   // perdaug sukuria reikia pasiziureti kad ciklas neziureti tiek skaiciu
   d = new Date(year, month, i);
-
   const weekDay = d.getDay();
 
-  //   if (i < weekDay) {
-  //     divEl = document.createElement("div");
-  //     divEl.classList.add("helper");
-  //     monday.appendChild(divEl);
-  //     // continue;
-  //   }
+  // if (i < weekDayOfFirstMonthDay) {
+  //   divEl = document.createElement("div");
+  //   divEl.classList.add("helper");
+  //   monday.appendChild(divEl);
+  //   tuesday.appendChild(divEl);
+  //   wednesday.appendChild(divEl);
+  //   thursday.appendChild(divEl);
+  //   friday.appendChild(divEl);
+  //   saturday.appendChild(divEl);
+  //   continue;
+  // }
+
+  if (sessionStorage.length > 0) {
+    for (let j = 1; j <= sessionStorage.length; j++) {
+      const strings = sessionStorage.getItem(`data${j}`);
+      const allData = JSON.parse(strings);
+      // const options = { year: "numeric", month: "long", day: "numeric" };
+      // console.log(
+      //   new Date(`${year}-${month + 1}-${i + 1}`).toLocaleDateString("lt")
+      // );
+      const date = new Date(`${year}-${month + 1}-${i}`).toLocaleDateString(
+        "lt"
+      );
+      if (allData.dateInput === date) {
+        console.log(allData);
+        const divElement = document.createElement("div");
+        divElement.classList.add("title-block");
+        const text = document.createTextNode(`${allData.titleInput}`);
+        const spanElement = document.createElement("span");
+        spanElement.appendChild(text);
+        spanEl = document.createElement("span");
+        spanEl.classList.add("type-bubble");
+        if (allData.typeInput === "Meeting") {
+          spanEl.style.backgroundColor = "red";
+        } else if (allData.typeInput === "Call") {
+          spanEl.style.backgroundColor = "green";
+        } else if (allData.typeInput === "Out of office") {
+          spanEl.style.backgroundColor = "yellow";
+        }
+        divElement.appendChild(spanElement);
+        divElement.appendChild(spanEl);
+        divEl.appendChild(divElement);
+      }
+    }
+  }
 
   switch (weekDay) {
     case 0:
       // if irasyti kad tuscius div, kad jei i nera lygus 1 arba prasideda ne nuo 1
       divEl = document.createElement("div");
+      spanEl = document.createElement("span");
+      spanEl.classList.add("calendar-days");
       day = document.createTextNode(`${i + 1}`);
-      divEl.setAttribute("value", `${i + 1}`);
-      divEl.appendChild(day);
+      // padaryti kaip pilna data ne tik diena kad butu i session lengviau irasyti
+      spanEl.appendChild(day);
+      divEl.setAttribute(
+        "value",
+        `${new Date(`${year}-${month + 1}-${i + 1}`).toLocaleDateString("lt")}`
+      );
+      divEl.appendChild(spanEl);
+      divEl.classList.add("day-fields");
       monday.appendChild(divEl);
       break;
     case 1:
       divEl = document.createElement("div");
+      spanEl = document.createElement("span");
+      spanEl.classList.add("calendar-days");
       day = document.createTextNode(`${i + 1}`);
-      divEl.setAttribute("value", `${i + 1}`);
-      divEl.appendChild(day);
+      spanEl.appendChild(day);
+      divEl.setAttribute(
+        "value",
+        `${new Date(`${year}-${month + 1}-${i + 1}`).toLocaleDateString("lt")}`
+      );
+      divEl.appendChild(spanEl);
+      divEl.classList.add("day-fields");
       tuesday.appendChild(divEl);
       break;
     case 2:
       divEl = document.createElement("div");
+      spanEl = document.createElement("span");
+      spanEl.classList.add("calendar-days");
       day = document.createTextNode(`${i + 1}`);
-      divEl.setAttribute("value", `${i + 1}`);
-      divEl.appendChild(day);
+      spanEl.appendChild(day);
+      divEl.setAttribute(
+        "value",
+        `${new Date(`${year}-${month + 1}-${i + 1}`).toLocaleDateString("lt")}`
+      );
+      divEl.appendChild(spanEl);
+      divEl.classList.add("day-fields");
       wednesday.appendChild(divEl);
       break;
     case 3:
       divEl = document.createElement("div");
+      spanEl = document.createElement("span");
+      spanEl.classList.add("calendar-days");
       day = document.createTextNode(`${i + 1}`);
-      divEl.setAttribute("value", `${i + 1}`);
-      divEl.appendChild(day);
+      spanEl.appendChild(day);
+      divEl.setAttribute(
+        "value",
+        `${new Date(`${year}-${month + 1}-${i + 1}`).toLocaleDateString("lt")}`
+      );
+      divEl.appendChild(spanEl);
+      divEl.classList.add("day-fields");
       thursday.appendChild(divEl);
       break;
     case 4:
       divEl = document.createElement("div");
+      spanEl = document.createElement("span");
+      spanEl.classList.add("calendar-days");
       day = document.createTextNode(`${i + 1}`);
-      divEl.setAttribute("value", `${i + 1}`);
-      divEl.appendChild(day);
+      spanEl.appendChild(day);
+      divEl.setAttribute(
+        "value",
+        `${new Date(`${year}-${month + 1}-${i + 1}`).toLocaleDateString("lt")}`
+      );
+      divEl.appendChild(spanEl);
+      divEl.classList.add("day-fields");
       friday.appendChild(divEl);
       break;
     case 5:
       divEl = document.createElement("div");
+      spanEl = document.createElement("span");
+      spanEl.classList.add("calendar-days");
       day = document.createTextNode(`${i + 1}`);
-      divEl.setAttribute("value", `${i + 1}`);
-      divEl.appendChild(day);
+      spanEl.appendChild(day);
+      divEl.setAttribute(
+        "value",
+        `${new Date(`${year}-${month + 1}-${i + 1}`).toLocaleDateString("lt")}`
+      );
+      divEl.appendChild(spanEl);
+      divEl.classList.add("day-fields");
       saturday.appendChild(divEl);
       break;
     case 6:
       divEl = document.createElement("div");
+      spanEl = document.createElement("span");
+      spanEl.classList.add("calendar-days");
       day = document.createTextNode(`${i + 1}`);
-      divEl.setAttribute("value", `${i + 1}`);
-      divEl.appendChild(day);
+      spanEl.appendChild(day);
+      divEl.setAttribute(
+        "value",
+        `${new Date(`${year}-${month + 1}-${i + 1}`).toLocaleDateString("lt")}`
+      );
+      divEl.appendChild(spanEl);
+      divEl.classList.add("day-fields");
       sunday.appendChild(divEl);
       break;
   }
@@ -103,9 +272,16 @@ for (let i = 0; i < allMonthDays; i++) {
   //   console.log(weekDay);
 }
 
-// const formInputs = document.querySelector("#formInputs");
+// Show form and close form listeners
+// jei forma yra uzdaroma tada i sesija isiraso is naujo tai negalima jos pradanginti
 document.querySelector("#showForm").addEventListener("click", () => {
-  document.querySelector("#formInputs").style.display = "block";
+  // document.querySelector("#formInputs").style.display = "block";
+  document.querySelector("#formInputs").style.opacity = "1";
+});
+
+document.querySelector("#closeForm").addEventListener("click", () => {
+  // document.querySelector("#formInputs").style.display = "none";
+  document.querySelector("#formInputs").style.opacity = "0";
 });
 
 // session storage
@@ -118,6 +294,7 @@ const startTimeInput = document.querySelector("#startTime");
 const endTimeInput = document.querySelector("#endTime");
 const typeInput = document.querySelector("#type");
 const descriptionInput = document.querySelector("#description");
+
 function createEvent() {
   //   patikrinti ar session storage toks egzistuoja ir tada tik irasyti nes tokiu paciu vardu neleidzia irasyti
 
@@ -154,15 +331,6 @@ function createEvent() {
   //   }
 }
 
-// function getEvent() {
-//   sessionStorage.getItem("title");
-//   sessionStorage.getItem("date");
-//   sessionStorage.getItem("startTime");
-//   sessionStorage.getItem("endTime");
-//   sessionStorage.getItem("type");
-//   sessionStorage.getItem("description");
-// }
-
 const detailedViews = document.querySelector("#detailedViews");
 function detailView(value) {
   const event = sessionStorage.getItem(`${value}`);
@@ -170,7 +338,7 @@ function detailView(value) {
   console.log(data);
 }
 
-// validation
+// Form validations
 
 titleInput.addEventListener("input", () => {
   if (titleInput.value === "" && titleInput.value.length <= 0) {

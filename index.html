@@ -20,40 +20,41 @@
       </div>
       <div class="all-view">
         <div class="month-view">
-          <h3>Month View</h3>
+          <h2>Month View</h2>
           <div class="calendar">
             <div>
-              <div>Monday</div>
-              <div id="monday"></div>
+              <div class="week-day">Monday</div>
+              <div id="monday" class="month-days"></div>
             </div>
             <div>
-              <div>Tuesday</div>
-              <div id="tuesday"></div>
+              <div class="week-day">Tuesday</div>
+              <div id="tuesday" class="month-days"></div>
             </div>
             <div>
-              <div>Wednesday</div>
-              <div id="wednesday"></div>
+              <div class="week-day">Wednesday</div>
+              <div id="wednesday" class="month-days"></div>
             </div>
             <div>
-              <div>Thursday</div>
-              <div id="thursday"></div>
+              <div class="week-day">Thursday</div>
+              <div id="thursday" class="month-days"></div>
             </div>
             <div>
-              <div>Friday</div>
-              <div id="friday"></div>
+              <div class="week-day">Friday</div>
+              <div id="friday" class="month-days"></div>
             </div>
             <div>
-              <div>Saturday</div>
-              <div id="saturday"></div>
+              <div class="week-day">Saturday</div>
+              <div id="saturday" class="month-days"></div>
             </div>
             <div>
-              <div>Sunday</div>
-              <div id="sunday"></div>
+              <div class="week-day">Sunday</div>
+              <div id="sunday" class="month-days"></div>
             </div>
           </div>
         </div>
         <div>
           <div id="formInputs" class="form-inputs">
+            <span id="closeForm" class="closeFormBtn">&times;</span>
             <form action="" method="post">
               <h3>Create View</h3>
               <div>
@@ -138,6 +139,7 @@
             <button id="modalBtn" class="btn">Delete</button>
             <div id="modalView" class="modal">
               <div class="modal-content">
+                <div>Do you want to delete event?</div>
                 <button class="btn closeBtn">Cancel</button>
                 <button class="btn submitBtn">Submit</button>
               </div>

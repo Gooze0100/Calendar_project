@@ -1,140 +1,222 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Gill Sans', 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Trebuchet MS", sans-serif;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 header {
-    text-align: center;
-    padding: 15px;
+  text-align: center;
+  padding: 15px;
 }
 
 .btn {
-    background-color: royalblue;
-    border: none;
-    padding: 8px 16px;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.2s all cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  background-color: royalblue;
+  border: none;
+  padding: 8px 16px;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 
 .btn:hover {
-    background-color: rgba(65, 105, 225, 0.8);
+  background-color: rgb(39, 83, 216);
 }
 
 .all-view {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
 }
 
 .month-view {
-    width: 100%;
+  width: 100%;
 }
 
 .calendar {
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: start;
+  /* border: 1px solid saddlebrown; */
+}
+
+.week-day {
+  background-color: wheat;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid steelblue;
+  width: 200px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.month-days {
+  padding: 5px;
+  border-radius: 5px;
+  background-color: steelblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.day-fields {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  border: 1px solid wheat;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.calendar-days {
+  position: absolute;
+  background-color: wheat;
+  border-radius: 50%;
+  top: 5px;
+  right: 5px;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .helper {
-    height: 20px;
-    width: 20px;
-    
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.title-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+  cursor: pointer;
+  background-color: teal;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.type-bubble {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin-left: 8px;
 }
 
 .inputError {
-    display: none;
-    color: crimson;
-    font-size: 12px;
+  display: none;
+  color: crimson;
+  font-size: 12px;
 }
 
-/* input:invalid:required {
-    border-color: crimson;
-} */
-
 input:focus:required:invalid {
-    border-color: crimson;
+  border-color: crimson;
 }
 
 .help-class {
-    border-color: crimson;
+  border-color: crimson;
 }
 
 .form-inputs {
-    /* display: none; */
-    box-shadow: 4px 5px 9px 1px rgba(0,0,0,0.43);
-    padding: 20px;
-    border-radius: 5px;
+  /* display: none; */
+  opacity: 0;
+  box-shadow: 4px 5px 9px 1px rgba(0, 0, 0, 0.43);
+  padding: 20px;
+  border-radius: 5px;
+  animation-name: modalOpen;
+  animation-duration: 1s;
 }
 
-h3 {
-    text-align: center;
+.closeFormBtn {
+  color: #ccc;
+  float: right;
+  font-size: 30px;
+  transition: 0.2s color ease-out;
+}
+.closeFormBtn:hover,
+.closeFormBtn:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+h2 {
+  text-align: center;
 }
 
 label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    margin-top: 15px;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 15px;
 }
 
-input, select, textarea {
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 2px;
-    width: 100%;
+input,
+select,
+textarea {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 2px;
+  width: 100%;
 }
 
-input, select {
-    padding: 5px 10px;
+input,
+select {
+  padding: 5px 10px;
 }
 
 textarea {
-    padding: 5px 10px;
-    resize: vertical;
+  padding: 5px 10px;
+  resize: vertical;
 }
 
-
-
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
-    background-color: #f4f4f4;
-    margin: 30% auto;
-    padding: 20px;
-    width: 70%;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2),0 7px 20px 0 rgba(0, 0, 0, 0.2);
-    animation-name: modalOpen;
-    animation-duration: 1s;
+  background-color: #f4f4f4;
+  margin: 30% auto;
+  padding: 20px;
+  width: 70%;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
+  animation-name: modalOpen;
+  animation-duration: 1s;
 }
 
 @keyframes modalOpen {
-    from{opacity:0}
-    to {opacity: 1}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* ============================
