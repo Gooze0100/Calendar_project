@@ -154,6 +154,9 @@ for (let i = 0; i < allMonthDays; i++) {
         }
         divElement.appendChild(spanElement);
         divElement.appendChild(spanEl);
+        divElement.addEventListener("click", () => {
+          // create event that to get inputs just read only
+        });
         divEl.appendChild(divElement);
       }
     }
