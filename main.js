@@ -5,8 +5,6 @@ const date = new Date();
 const year = date.getFullYear();
 const month = date.getMonth();
 const options = { year: "numeric", month: "long" };
-// console.log(
-//   new Date(`${year}-${month + 1}-${i + 1}`).toLocaleDateString("lt")
 currentPeriod.append(new Date(year, month).toLocaleDateString("en", options));
 
 function getDaysInMonth() {
@@ -34,8 +32,6 @@ let day;
 let d1 = new Date(year, month, 0);
 let d;
 const weekDayOfFirstMonthDay = d1.getDay();
-// console.log(month);
-// console.log(weekDayOfFirstMonthDay);
 
 if (weekDayOfFirstMonthDay === 1) {
   divEl = document.createElement("div");
@@ -109,35 +105,18 @@ if (weekDayOfFirstMonthDay === 1) {
 }
 
 for (let i = 0; i < allMonthDays; i++) {
-  // perdaug sukuria reikia pasiziureti kad ciklas neziureti tiek skaiciu
   d = new Date(year, month, i);
   const weekDay = d.getDay();
-
-  // if (i < weekDayOfFirstMonthDay) {
-  //   divEl = document.createElement("div");
-  //   divEl.classList.add("helper");
-  //   monday.appendChild(divEl);
-  //   tuesday.appendChild(divEl);
-  //   wednesday.appendChild(divEl);
-  //   thursday.appendChild(divEl);
-  //   friday.appendChild(divEl);
-  //   saturday.appendChild(divEl);
-  //   continue;
-  // }
 
   if (sessionStorage.length > 0) {
     for (let j = 1; j <= sessionStorage.length; j++) {
       const strings = sessionStorage.getItem(`data${j}`);
       const allData = JSON.parse(strings);
-      // const options = { year: "numeric", month: "long", day: "numeric" };
-      // console.log(
-      //   new Date(`${year}-${month + 1}-${i + 1}`).toLocaleDateString("lt")
-      // );
       const date = new Date(`${year}-${month + 1}-${i}`).toLocaleDateString(
         "lt"
       );
+
       if (allData.dateInput === date) {
-        console.log(allData);
         const divElement = document.createElement("div");
         divElement.classList.add("title-block");
         const text = document.createTextNode(`${allData.titleInput}`);
@@ -154,22 +133,127 @@ for (let i = 0; i < allMonthDays; i++) {
         }
         divElement.appendChild(spanElement);
         divElement.appendChild(spanEl);
-        divElement.addEventListener("click", () => {
-          // create event that to get inputs just read only
-        });
+
+        // Create detailed view
+        divElement.addEventListener(
+          "click",
+          (e) => {
+            console.log(e.target);
+            const emptyBox = document.querySelector("#detailedViews");
+            let newDiv = document.createElement("div");
+            newDiv.classList.add("detailed-view-form");
+
+            if (allData.titleInput) {
+              let newDiv1 = document.createElement("div");
+              newDiv1.classList.add("text-info");
+              newDiv1.innerText = `Title: ${allData.titleInput}`;
+              newDiv.appendChild(newDiv1);
+            }
+            if (allData.dateInput) {
+              let newDiv2 = document.createElement("div");
+              newDiv2.classList.add("text-info");
+              newDiv2.innerText = `Date: ${allData.dateInput}`;
+              newDiv.appendChild(newDiv2);
+            }
+            if (allData.startTimeInput) {
+              let newDiv3 = document.createElement("div");
+              newDiv3.classList.add("text-info");
+              newDiv3.innerText = `Start time: ${allData.startTimeInput}`;
+              newDiv.appendChild(newDiv3);
+            }
+            if (allData.endTimeInput) {
+              let newDiv4 = document.createElement("div");
+              newDiv4.classList.add("text-info");
+              newDiv4.innerText = `End time: ${allData.endTimeInput}`;
+              newDiv.appendChild(newDiv4);
+            }
+            if (allData.typeInput) {
+              let newDiv5 = document.createElement("div");
+              newDiv5.classList.add("text-info");
+              newDiv5.innerText = `Type: ${allData.typeInput}`;
+              newDiv.appendChild(newDiv5);
+            }
+            if (allData.descriptionInput) {
+              let newDiv6 = document.createElement("div");
+              newDiv6.classList.add("text-info");
+              newDiv6.innerText = `Type: ${allData.descriptionInput}`;
+              newDiv.appendChild(newDiv6);
+            }
+
+            const modalSubmitBtn = document.createElement("button");
+            modalSubmitBtn.innerText = "Submit";
+            modalSubmitBtn.setAttribute("class", "btn");
+            modalSubmitBtn.setAttribute("value", `${j}`);
+            modalSubmitBtn.id = "submitBtn";
+            const modalContent = document.querySelector("#modalContent");
+            modalContent.appendChild(modalSubmitBtn);
+
+            let newDiv2 = document.createElement("div");
+            let deleteButton = document.createElement("button");
+            deleteButton.innerText = "Delete";
+            deleteButton.setAttribute("value", `${j}`);
+            deleteButton.setAttribute("class", "btn");
+            deleteButton.id = "modalBtn";
+            newDiv2.appendChild(deleteButton);
+
+            newDiv.appendChild(newDiv2);
+            emptyBox.appendChild(newDiv);
+
+            const modal = document.querySelector("#modalView");
+            const modalBtn = document.querySelectorAll("#modalBtn");
+            const closeBtn = document.querySelector("#closeBtn");
+            if (modalBtn) {
+              modalBtn.forEach((e) => {
+                e.addEventListener("click", (e) => {
+                  modal.style.display = "block";
+                  // cia padaryti kad submit button atsirastu tik tada kai toks delete paspaudamas
+                  // console.log(e.target.value);
+                  // console.log(modalSubmitBtn.value);
+                  // if (e.target.value !== modalSubmitBtn.value) {
+                  //   // modalContent.removeChild(modalSubmitBtn);
+                  //   // modalContent.replaceChild(modalSubmitBtn, modalSubmitBtn);
+                  //   modalSubmitBtn.hasChildNodes()
+                  // }
+                  if (modalContent.hasChildNodes()) {
+                    // while (modalContent.firstChild) {
+                    //   modalContent.removeChild(modalContent.lastChild);
+                    // }
+                  }
+                });
+              });
+            }
+            closeBtn.addEventListener("click", () => {
+              modal.style.display = "none";
+            });
+            window.addEventListener("click", (e) => {
+              if (e.target == modal) {
+                modal.style.display = "none";
+              }
+            });
+
+            const submitBtn = document.querySelectorAll("#submitBtn");
+            submitBtn.forEach((e) => {
+              e.addEventListener("click", (v) => {
+                console.log(v.target.value);
+                console.log(`data${v.currentTarget.value}`);
+                // sessionStorage.removeItem(`data${j}`);
+              });
+            });
+          },
+          { once: true }
+        );
         divEl.appendChild(divElement);
       }
     }
   }
 
+  // Create calendar fields
   switch (weekDay) {
     case 0:
-      // if irasyti kad tuscius div, kad jei i nera lygus 1 arba prasideda ne nuo 1
       divEl = document.createElement("div");
       spanEl = document.createElement("span");
       spanEl.classList.add("calendar-days");
       day = document.createTextNode(`${i + 1}`);
-      // padaryti kaip pilna data ne tik diena kad butu i session lengviau irasyti
       spanEl.appendChild(day);
       divEl.setAttribute(
         "value",
@@ -264,30 +348,18 @@ for (let i = 0; i < allMonthDays; i++) {
       sunday.appendChild(divEl);
       break;
   }
-
-  //   const liEl = document.createElement("li");
-  //   const spanEl = document.createElement("span");
-  //   const number = document.createTextNode(`${i}`);
-  //   spanEl.appendChild(number);
-  //   liEl.appendChild(spanEl);
-  //   dayNumber.appendChild(liEl);
-  //   liEl.setAttribute("value", i);
-  //   console.log(weekDay);
 }
 
 // Show form and close form listeners
-// jei forma yra uzdaroma tada i sesija isiraso is naujo tai negalima jos pradanginti
 document.querySelector("#showForm").addEventListener("click", () => {
-  // document.querySelector("#formInputs").style.display = "block";
   document.querySelector("#formInputs").style.opacity = "1";
 });
 
 document.querySelector("#closeForm").addEventListener("click", () => {
-  // document.querySelector("#formInputs").style.display = "none";
   document.querySelector("#formInputs").style.opacity = "0";
 });
 
-// session storage
+// Set session storage
 const createEventBtn = document.querySelector("#createEventBtn");
 createEventBtn.addEventListener("click", createEvent);
 let queue = 1;
@@ -299,10 +371,6 @@ const typeInput = document.querySelector("#type");
 const descriptionInput = document.querySelector("#description");
 
 function createEvent() {
-  //   patikrinti ar session storage toks egzistuoja ir tada tik irasyti nes tokiu paciu vardu neleidzia irasyti
-
-  //   irasyti i masyva arba json faila padaryti
-
   const dataObj = {
     titleInput: titleInput.value,
     dateInput: dateInput.value,
@@ -315,34 +383,9 @@ function createEvent() {
   const inputs = JSON.stringify(dataObj);
   sessionStorage.setItem(`data${queue}`, inputs);
   queue++;
-
-  //   if (title !== "" && typeof title === "string") {
-  //     sessionStorage.setItem("title", title);
-  //   }
-  //   if (date !== "") {
-  //     sessionStorage.setItem("date", date);
-  //   }
-  //   if (startTime !== "") {
-  //     sessionStorage.setItem("startTime", startTime);
-  //   }
-  //   if (endTime !== "") {
-  //     sessionStorage.setItem("endTime", endTime);
-  //   }
-  //   sessionStorage.setItem("type", type);
-  //   if (description !== "" && typeof description === "string") {
-  //     sessionStorage.setItem("description", description);
-  //   }
-}
-
-const detailedViews = document.querySelector("#detailedViews");
-function detailView(value) {
-  const event = sessionStorage.getItem(`${value}`);
-  const data = JSON.parse(event);
-  console.log(data);
 }
 
 // Form validations
-
 titleInput.addEventListener("input", () => {
   if (titleInput.value === "" && titleInput.value.length <= 0) {
     document.querySelector("#titleErr1").style.display = "inline";
@@ -356,7 +399,6 @@ titleInput.addEventListener("input", () => {
     titleInput.classList.remove("help-class");
   }
 });
-
 dateInput.addEventListener("change", () => {
   if (dateInput.value === "" && dateInput.value.length <= 0) {
     document.querySelector("#dateErr1").style.display = "inline";
@@ -370,7 +412,6 @@ dateInput.addEventListener("change", () => {
     dateInput.classList.remove("help-class");
   }
 });
-
 startTimeInput.addEventListener("input", () => {
   if (startTimeInput.value === "" && startTimeInput.value.length <= 0) {
     document.querySelector("#startTimeErr1").style.display = "inline";
@@ -384,7 +425,6 @@ startTimeInput.addEventListener("input", () => {
     startTimeInput.classList.remove("help-class");
   }
 });
-
 endTimeInput.addEventListener("input", () => {
   if (endTimeInput.value === "" && endTimeInput.value.length <= 0) {
     document.querySelector("#endTimeErr1").style.display = "inline";
@@ -402,7 +442,6 @@ endTimeInput.addEventListener("input", () => {
     endTimeInput.classList.remove("help-class");
   }
 });
-
 typeInput.addEventListener("input", () => {
   if (typeInput.value === "" && typeInput.value.length <= 0) {
     document.querySelector("#endTimeErr1").style.display = "inline";
@@ -417,19 +456,5 @@ typeInput.addEventListener("input", () => {
 });
 
 // padaryti button disabled jei forma negerai uzpildyta
-
-const modal = document.querySelector("#modalView");
-const modalBtn = document.querySelector("#modalBtn");
-const closeBtn = document.querySelector(".closeBtn");
-
-modalBtn.addEventListener("click", () => {
-  modal.style.display = "block";
-});
-closeBtn.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-window.addEventListener("click", (e) => {
-  if (e.target == modal) {
-    modal.style.display = "none";
-  }
-});
+// padaryti kad kalendoriuje butu galima kelis blokus saugoti ta pacia diena
+// istrinti galeti

@@ -42,6 +42,12 @@ header {
   width: 100%;
 }
 
+.createBtn {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
 .calendar {
   width: 100%;
   padding: 15px;
@@ -108,7 +114,7 @@ header {
   justify-content: center;
   margin-top: 25px;
   cursor: pointer;
-  background-color: teal;
+  background-color: wheat;
   border-radius: 10px;
   padding: 10px;
 }
@@ -188,6 +194,23 @@ textarea {
   resize: vertical;
 }
 
+#detailedViews {
+  padding: 15px;
+}
+
+.detailed-view-form {
+  padding: 10px;
+  border: 2px solid wheat;
+  border-radius: 5px;
+  background-color: #ccc;
+  box-shadow: 4px 5px 9px 1px rgba(0, 0, 0, 0.43);
+  margin-bottom: 5px;
+}
+
+.text-info {
+  margin-bottom: 5px;
+}
+
 .modal {
   display: none;
   position: fixed;
@@ -201,13 +224,18 @@ textarea {
 }
 
 .modal-content {
-  background-color: #f4f4f4;
+  background-color: #ccc;
+  border-radius: 5px;
   margin: 30% auto;
   padding: 20px;
-  width: 70%;
+  width: 20%;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
   animation-name: modalOpen;
   animation-duration: 1s;
+}
+
+.modal-content div:first-child {
+  margin-bottom: 15px;
 }
 
 @keyframes modalOpen {

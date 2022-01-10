@@ -10,16 +10,16 @@
   </head>
   <body>
     <div class="container">
-      <div>
-        <header>
-          <h1 id="currentPeriod"></h1>
-        </header>
-        <div>
-          <button id="showForm" class="btn">Create event</button>
-        </div>
-      </div>
       <div class="all-view">
         <div class="month-view">
+          <div>
+            <header>
+              <h1 id="currentPeriod"></h1>
+            </header>
+            <div class="createBtn">
+              <button id="showForm" class="btn">Create event</button>
+            </div>
+          </div>
           <h2>Month View</h2>
           <div class="calendar">
             <div>
@@ -135,13 +135,10 @@
             </form>
           </div>
           <div id="detailedViews">
-            Detail view, create field on fly
-            <button id="modalBtn" class="btn">Delete</button>
             <div id="modalView" class="modal">
-              <div class="modal-content">
+              <div id="modalContent" class="modal-content">
                 <div>Do you want to delete event?</div>
-                <button class="btn closeBtn">Cancel</button>
-                <button class="btn submitBtn">Submit</button>
+                <button id="closeBtn" class="btn">Cancel</button>
               </div>
             </div>
           </div>
