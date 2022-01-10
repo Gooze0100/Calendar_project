@@ -104,12 +104,14 @@ if (weekDayOfFirstMonthDay === 1) {
   saturday.appendChild(divEl5);
 }
 
+let queue = 1;
+
 for (let i = 0; i < allMonthDays; i++) {
   d = new Date(year, month, i);
   const weekDay = d.getDay();
 
   if (sessionStorage.length > 0) {
-    for (let j = 1; j <= sessionStorage.length; j++) {
+    for (let j = 1; j < sessionStorage.length; j++) {
       const strings = sessionStorage.getItem(`data${j}`);
       const allData = JSON.parse(strings);
       const date = new Date(`${year}-${month + 1}-${i}`).toLocaleDateString(
@@ -180,14 +182,6 @@ for (let i = 0; i < allMonthDays; i++) {
               newDiv.appendChild(newDiv6);
             }
 
-            const modalSubmitBtn = document.createElement("button");
-            modalSubmitBtn.innerText = "Submit";
-            modalSubmitBtn.setAttribute("class", "btn");
-            modalSubmitBtn.setAttribute("value", `${j}`);
-            modalSubmitBtn.id = "submitBtn";
-            const modalContent = document.querySelector("#modalContent");
-            modalContent.appendChild(modalSubmitBtn);
-
             let newDiv2 = document.createElement("div");
             let deleteButton = document.createElement("button");
             deleteButton.innerText = "Delete";
@@ -195,6 +189,22 @@ for (let i = 0; i < allMonthDays; i++) {
             deleteButton.setAttribute("class", "btn");
             deleteButton.id = "modalBtn";
             newDiv2.appendChild(deleteButton);
+            let deleteButtonCreated = document.querySelectorAll(`#submitBtn`);
+
+            if (deleteButtonCreated.length === 0) {
+              const modalSubmitBtn = document.createElement("button");
+              modalSubmitBtn.innerText = "Submit";
+              modalSubmitBtn.setAttribute("class", "btn");
+              modalSubmitBtn.setAttribute("value", `${j}`);
+              modalSubmitBtn.id = "submitBtn";
+              const modalContent = document.querySelector("#modalContent");
+              modalContent.appendChild(modalSubmitBtn);
+            }
+
+            if (deleteButtonCreated.length > 1) {
+              modalSubmitBtn.setAttribute("value", `${j}`);
+              // modalContent.replaceChild(modalSubmitBtn, modalSubmitBtn1);
+            }
 
             newDiv.appendChild(newDiv2);
             emptyBox.appendChild(newDiv);
@@ -204,21 +214,8 @@ for (let i = 0; i < allMonthDays; i++) {
             const closeBtn = document.querySelector("#closeBtn");
             if (modalBtn) {
               modalBtn.forEach((e) => {
-                e.addEventListener("click", (e) => {
+                e.addEventListener("click", () => {
                   modal.style.display = "block";
-                  // cia padaryti kad submit button atsirastu tik tada kai toks delete paspaudamas
-                  // console.log(e.target.value);
-                  // console.log(modalSubmitBtn.value);
-                  // if (e.target.value !== modalSubmitBtn.value) {
-                  //   // modalContent.removeChild(modalSubmitBtn);
-                  //   // modalContent.replaceChild(modalSubmitBtn, modalSubmitBtn);
-                  //   modalSubmitBtn.hasChildNodes()
-                  // }
-                  if (modalContent.hasChildNodes()) {
-                    // while (modalContent.firstChild) {
-                    //   modalContent.removeChild(modalContent.lastChild);
-                    // }
-                  }
                 });
               });
             }
@@ -231,13 +228,10 @@ for (let i = 0; i < allMonthDays; i++) {
               }
             });
 
-            const submitBtn = document.querySelectorAll("#submitBtn");
-            submitBtn.forEach((e) => {
-              e.addEventListener("click", (v) => {
-                console.log(v.target.value);
-                console.log(`data${v.currentTarget.value}`);
-                // sessionStorage.removeItem(`data${j}`);
-              });
+            const submitBtn = document.querySelector(`#submitBtn`);
+
+            submitBtn.addEventListener("click", (e) => {
+              console.log(e.target.value);
             });
           },
           { once: true }
@@ -362,7 +356,6 @@ document.querySelector("#closeForm").addEventListener("click", () => {
 // Set session storage
 const createEventBtn = document.querySelector("#createEventBtn");
 createEventBtn.addEventListener("click", createEvent);
-let queue = 1;
 const titleInput = document.querySelector("#title");
 const dateInput = document.querySelector("#date");
 const startTimeInput = document.querySelector("#startTime");
@@ -381,8 +374,11 @@ function createEvent() {
   };
 
   const inputs = JSON.stringify(dataObj);
-  sessionStorage.setItem(`data${queue}`, inputs);
+  sessionStorage.setItem(`queue`, queue);
+  const number = sessionStorage.getItem(`queue`);
+  sessionStorage.setItem(`data${number}`, inputs);
   queue++;
+  sessionStorage.setItem(`queue`, queue);
 }
 
 // Form validations
@@ -455,6 +451,6 @@ typeInput.addEventListener("input", () => {
   }
 });
 
-// padaryti button disabled jei forma negerai uzpildyta
-// padaryti kad kalendoriuje butu galima kelis blokus saugoti ta pacia diena
-// istrinti galeti
+// Make create button disabled if form filled not correct
+// Make fields adjustable to event amount.
+// Fix delete button.
